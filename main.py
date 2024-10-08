@@ -45,5 +45,7 @@ def get_date(location_name: Union[str, None] = None):
     select_query = "select * from weather where city = '"+location_name+"' "
     cur.execute(select_query)
     records = cur.fetchall()
+    conn.close()
 
-    return {"city": records[0][0], "low": records[0][1], "high": records[0][2]}
+
+    return {"city": records[0][1], "low": records[0][2], "high": records[0][3]}
