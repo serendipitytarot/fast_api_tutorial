@@ -8,6 +8,8 @@ from dotenv import load_dotenv
 
 import psycopg2
 
+import requests
+
 db_name = 'kris'
 db_user = 'kris'
 db_password = 'SJuALVOkZGDG8lqPsi8rVGU5AyQRuWNS'
@@ -30,6 +32,11 @@ async def main():
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Union[str, None] = None):
     return {"item_id": item_id, "q":q}
+
+@app.get("/cron-job")
+def refresh_web():
+    x = requests.get('https://serendipitytarot-github-io.onrender.com/')
+    return {"status":x.status_code}
 
 @app.get("/getdata/{location_name}")
 def get_date(location_name: Union[str, None] = None):
